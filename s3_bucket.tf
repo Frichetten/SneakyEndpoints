@@ -4,4 +4,5 @@
 resource "aws_s3_bucket" "sneakyendpoints_transfer_bucket" {
   bucket_prefix = "sneakyendpoints-trasfer-bucket-"
   acl           = "private"
+  force_destroy = true
 }
