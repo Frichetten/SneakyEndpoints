@@ -21,7 +21,7 @@ When you're finished, perform the `terraform destroy` command to tear down the e
 
 For your convenience, this tool will also create an S3 bucket for you to move scripts and other tools to the host. The name of the bucket is displayed as an output when the `apply` is finished. The bucket will be destroyed when you run `destroy`.
 
-All infrastructure is created in `us-east-`. A find and replace tool can set this to the region of your choice.
+All infrastructure is created in `us-east-1`. A find and replace tool can set this to the region of your choice.
 
 ## IMPORTANT
 Please note! This will charge your account for the environment. The cost should be low if being used for short periods of time. However, if left for extended periods of time the charges can add up. Please ensure you are deleting the infrastructure when you're finished. `I take no responsibility for charges incurred on your account for using this project`.
