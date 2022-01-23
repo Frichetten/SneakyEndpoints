@@ -6,7 +6,7 @@ When targeting AWS environments as a Penetration Tester or Red Teamer you may st
 
 The common [solution](https://hackingthe.cloud/aws/avoiding-detection/steal-keys-undetected/) was to use those credentials from your own EC2 instance. This would evade detection because GuardDuty was only checking if the credentials were used outside of EC2. Not the original EC2 instance, any EC2 instance.
 
-On January 20th, 2021 AWS released a new [GuardDuty finding](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-types-iam.html#unauthorizedaccess-iam-instancecredentialexfiltrationinsideaws) which would detect when credentials were used on a different EC2 instance, thus defeating the bypass. 
+On January 20th, 2022 AWS released a new [GuardDuty finding](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-types-iam.html#unauthorizedaccess-iam-instancecredentialexfiltrationinsideaws) which would detect when credentials were used on a different EC2 instance, thus defeating the bypass. 
 
 [Very quickly](https://twitter.com/Frichette_n/status/1484314130626449417?s=20), it was identified that this detection did not apply to [VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html). As a result, we can evade the GuardDuty finding by instead using VPC Endpoints. This project (SneakyEndpoints) seeks to make this evasion easier by providing the Terraform configs to setup an environment very quickly.
 
