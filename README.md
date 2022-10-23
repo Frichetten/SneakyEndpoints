@@ -11,7 +11,7 @@ On January 20th, 2022 AWS released a new [GuardDuty finding](https://docs.aws.am
 [Very quickly](https://twitter.com/Frichette_n/status/1484314130626449417?s=20), it was identified that this detection did not apply to [VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html). As a result, we can evade the GuardDuty finding by instead using VPC Endpoints. This project (SneakyEndpoints) seeks to make this evasion easier by providing the Terraform configs to setup an environment very quickly.
 
 ## How To Use
-Simple clone this repository and run the `terraform apply` command with suitable AWS credentials and [Terraform](https://www.terraform.io/) installed. This will create an EC2 instance in a private subnet with no internet access. It will also create a ton of VPC Endpoints for you to connect to. 
+Simply clone this repository and run `terraform init`, fillowed by `terraform apply` with suitable AWS credentials and [Terraform](https://www.terraform.io/) installed. This will create an EC2 instance in a private subnet with no internet access. It will also create a ton of VPC Endpoints for you to connect to. 
 
 Without internet access we prevent the possibility of leaking our use of the credentials and thus, alerting their owner. This ensures we use the VPC Endpoints.
 
