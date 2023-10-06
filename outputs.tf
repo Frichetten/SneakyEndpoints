@@ -7,7 +7,7 @@ output "sneakendpoints_host_id" {
 }
 
 output "notice" {
-  value = "Note: You may have to reboot the EC2 instance if you can't connect with SSM (there a bit of a delay between the endpoints coming up and the EC2 instance connecting"
+  value = "Note: You may have to wait 2-4 minutes for the instance to connect to SSM. If the instance still isn't connectable after this time, reboot the EC2 instance (there a bit of a delay between the endpoints coming up and the EC2 instance connecting"
 }
 
 output "warning" {
