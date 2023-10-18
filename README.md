@@ -23,6 +23,16 @@ For your convenience, this tool will also create an S3 bucket for you to move sc
 
 All infrastructure is created in `us-east-1`. A find and replace tool can set this to the region of your choice.
 
+## Using STS
+
+Due to a [quirk](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_sts_vpce.html#id_credentials_sts_vpce_create) in how STS is setup, you will have to set a specific environment variable with the following command.
+
+```shell
+export AWS_STS_REGIONAL_ENDPOINTS=regional
+```
+
+This is because some versions of the AWS SDK default to using the global STS endpoint at `sts.amazonaws.com`. This is problematic because VPC endpoints are regional (e.g. `sts.us-east-1.amazonaws.com`). The result is that if you use a version that is expecting the global endpoint with SneakyEndpoints, the connection will timeout.
+
 ## IMPORTANT
 Please note! This will charge your account for the environment. The cost should be low if being used for short periods of time. However, if left for extended periods of time the charges can add up. Please ensure you are deleting the infrastructure when you're finished. `I take no responsibility for charges incurred on your account for using this project`.
 
