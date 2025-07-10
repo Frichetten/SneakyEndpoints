@@ -24,7 +24,6 @@ resource "aws_instance" "sneakyendpoints_host" {
 
 resource "aws_iam_role" "sneakyendpoints_role" {
   name                = "sneakyendpoints_role"
-  managed_policy_arns = [aws_iam_policy.access_transfer_bucket.arn]
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
