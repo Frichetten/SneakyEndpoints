@@ -57,9 +57,14 @@ resource "aws_iam_policy" "access_transfer_bucket" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action   = ["s3:*"]
+        Action   = "s3:ListBucket"
         Effect   = "Allow"
         Resource = resource.aws_s3_bucket.sneakyendpoints_transfer_bucket.arn
+      },
+      {
+        Action   = "s3:*Object"
+        Effect   = "Allow"
+        Resource = "${resource.aws_s3_bucket.sneakyendpoints_transfer_bucket.arn}/*"
       }
     ]
   })
@@ -67,7 +72,7 @@ resource "aws_iam_policy" "access_transfer_bucket" {
 
 resource "aws_iam_role_policy_attachment" "ssm_policy_attachment" {
   role       = aws_iam_role.sneakyendpoints_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
 data "aws_ami" "amazon_linux_ami" {
@@ -77,6 +82,6 @@ data "aws_ami" "amazon_linux_ami" {
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-ebs"]
+    values = ["al2023-ami-2023.*-x86_64"]
   }
 }

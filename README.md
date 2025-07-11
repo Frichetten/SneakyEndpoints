@@ -41,18 +41,19 @@ Please note! This will charge your account for the environment. The cost should 
 Additionally, if you cannot connect to the EC2 instance, please wait a few minutes. If the issue persists, reboot the EC2 instance and wait a few more minutes. Likely the needed SSM VPC Endpoints did not come up in time for the SSM agent to connect to them.
 
 ## Supported Services
-For the sake of not spinning up resources that would never be used, this project on creates VPC Endpoints for common services. You are welcome to add your own, or submit a pull request. The following are the supported services.
+For the sake of not spinning up resources that would never be used, this project only creates VPC Endpoints for common services. You are welcome to add your own, or submit a pull request. The following are the supported services (strikethrough = deprecated due to network activity events detection):
 
-* S3
-* EC2
+* ~~S3~~
+* ~~EC2~~
+* SSM
 * RDS
 * EBS
-* ECS
+* ~~ECS~~
 * RedShift
-* CloudTrail
+* ~~CloudTrail~~
 * STS
 * CodePipeline
-* KMS
-* Lambda
+* ~~KMS~~
+* ~~Lambda~~
 * SNS
 * SQS
