@@ -88,3 +88,68 @@ resource "aws_vpc_endpoint_subnet_association" "sqs_vpce_association" {
   vpc_endpoint_id = aws_vpc_endpoint.sqs_vpce.id
   subnet_id       = aws_subnet.sneakyendpoints_private_subnet.id
 }
+
+resource "aws_vpc_endpoint" "ecr-api_vpce" {
+  vpc_id              = aws_vpc.sneakyendpoints_vpc.id
+  service_name        = "com.amazonaws.us-east-1.ecr.api"
+  vpc_endpoint_type   = "Interface"
+  security_group_ids  = [aws_security_group.allow_https.id]
+  private_dns_enabled = true
+}
+
+resource "aws_vpc_endpoint_subnet_association" "ecr-api_vpce_association" {
+  vpc_endpoint_id = aws_vpc_endpoint.ecr-api_vpce.id
+  subnet_id       = aws_subnet.sneakyendpoints_private_subnet.id
+}
+
+resource "aws_vpc_endpoint" "ecr-dkr_vpce" {
+  vpc_id              = aws_vpc.sneakyendpoints_vpc.id
+  service_name        = "com.amazonaws.us-east-1.ecr.dkr"
+  vpc_endpoint_type   = "Interface"
+  security_group_ids  = [aws_security_group.allow_https.id]
+  private_dns_enabled = true
+}
+
+resource "aws_vpc_endpoint_subnet_association" "ecr-dkr_vpce_association" {
+  vpc_endpoint_id = aws_vpc_endpoint.ecr-dkr_vpce.id
+  subnet_id       = aws_subnet.sneakyendpoints_private_subnet.id
+}
+
+resource "aws_vpc_endpoint" "eks_vpce" {
+  vpc_id              = aws_vpc.sneakyendpoints_vpc.id
+  service_name        = "com.amazonaws.us-east-1.eks"
+  vpc_endpoint_type   = "Interface"
+  security_group_ids  = [aws_security_group.allow_https.id]
+  private_dns_enabled = true
+}
+
+resource "aws_vpc_endpoint_subnet_association" "eks_vpce_association" {
+  vpc_endpoint_id = aws_vpc_endpoint.eks_vpce.id
+  subnet_id       = aws_subnet.sneakyendpoints_private_subnet.id
+}
+
+resource "aws_vpc_endpoint" "bedrock_vpce" {
+  vpc_id              = aws_vpc.sneakyendpoints_vpc.id
+  service_name        = "com.amazonaws.us-east-1.bedrock"
+  vpc_endpoint_type   = "Interface"
+  security_group_ids  = [aws_security_group.allow_https.id]
+  private_dns_enabled = true
+}
+
+resource "aws_vpc_endpoint_subnet_association" "bedrock_vpce_association" {
+  vpc_endpoint_id = aws_vpc_endpoint.bedrock_vpce.id
+  subnet_id       = aws_subnet.sneakyendpoints_private_subnet.id
+}
+
+resource "aws_vpc_endpoint" "bedrock-runtime_vpce" {
+  vpc_id              = aws_vpc.sneakyendpoints_vpc.id
+  service_name        = "com.amazonaws.us-east-1.bedrock-runtime"
+  vpc_endpoint_type   = "Interface"
+  security_group_ids  = [aws_security_group.allow_https.id]
+  private_dns_enabled = true
+}
+
+resource "aws_vpc_endpoint_subnet_association" "bedrock-runtime_vpce_association" {
+  vpc_endpoint_id = aws_vpc_endpoint.bedrock-runtime_vpce.id
+  subnet_id       = aws_subnet.sneakyendpoints_private_subnet.id
+}

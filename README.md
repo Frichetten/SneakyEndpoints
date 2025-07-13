@@ -57,3 +57,6 @@ For the sake of not spinning up resources that would never be used, this project
 * ~~Lambda~~
 * SNS
 * SQS
+* ECR
+* EKS
+* Bedrock
