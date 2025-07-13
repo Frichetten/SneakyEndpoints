@@ -10,7 +10,7 @@ resource "aws_vpc" "sneakyendpoints_vpc" {
 
 resource "aws_subnet" "sneakyendpoints_private_subnet" {
   vpc_id                  = aws_vpc.sneakyendpoints_vpc.id
-  availability_zone       = "us-east-1a"
+  availability_zone       = "${var.region}a"
   cidr_block              = "10.0.0.0/24"
   map_public_ip_on_launch = false
 

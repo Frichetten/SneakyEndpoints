@@ -23,7 +23,7 @@ When you're finished, perform the `terraform destroy` command to tear down the e
 
 For your convenience, this tool will also create an S3 bucket for you to move scripts and other tools to the host. The name of the bucket is displayed as an output when the `apply` is finished. The bucket will be destroyed when you run `destroy`.
 
-All infrastructure is created in `us-east-1`. A find and replace tool can set this to the region of your choice.
+By default, all infrastructure is created in `us-east-1`. You can specify a different region by setting a variable, for example by appending `-var "region=eu-west-1"` to the *terraform apply* command.
 
 ## Using STS
 
