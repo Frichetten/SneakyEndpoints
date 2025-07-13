@@ -10,7 +10,7 @@ resource "aws_vpc" "sneakyendpoints_vpc" {
 
 resource "aws_subnet" "sneakyendpoints_private_subnet" {
   vpc_id                  = aws_vpc.sneakyendpoints_vpc.id
-  availability_zone       = "us-east-1a"
+  availability_zone       = "${var.region}a"
   cidr_block              = "10.0.0.0/24"
   map_public_ip_on_launch = false
 
@@ -43,7 +43,6 @@ resource "aws_security_group" "allow_https" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
     self        = true
   }
 
@@ -52,7 +51,6 @@ resource "aws_security_group" "allow_https" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-    self        = true
   }
 
   tags = {

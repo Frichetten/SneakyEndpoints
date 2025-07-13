@@ -10,6 +10,8 @@ On January 20th, 2022 AWS released a new [GuardDuty finding](https://docs.aws.am
 
 [Very quickly](https://twitter.com/Frichette_n/status/1484314130626449417?s=20), it was identified that this detection did not apply to [VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html). As a result, we can evade the GuardDuty finding by instead using VPC Endpoints. This project (SneakyEndpoints) seeks to make this evasion easier by providing the Terraform configs to setup an environment very quickly.
 
+In October 2024, GuardDuty began detecting this bypass for services that support Cloudtrail **network activity events** for VPC endpoints — initially limited to EC2, KMS, Secrets Manager, and CloudTrail. By mid-2025, this detection capability had expanded to 26 AWS services. Before using this tool, be sure to test its current behavior and consult [AWS documentation](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html) to verify which services support network activity events, as these will trigger the alert.
+
 ## How To Use
 Simply clone this repository and run `terraform init`, fillowed by `terraform apply` with suitable AWS credentials and [Terraform](https://www.terraform.io/) installed. This will create an EC2 instance in a private subnet with no internet access. It will also create a ton of VPC Endpoints for you to connect to. 
 
@@ -21,7 +23,7 @@ When you're finished, perform the `terraform destroy` command to tear down the e
 
 For your convenience, this tool will also create an S3 bucket for you to move scripts and other tools to the host. The name of the bucket is displayed as an output when the `apply` is finished. The bucket will be destroyed when you run `destroy`.
 
-All infrastructure is created in `us-east-1`. A find and replace tool can set this to the region of your choice.
+By default, all infrastructure is created in `us-east-1`. You can specify a different region by setting a variable, for example by appending `-var "region=eu-west-1"` to the *terraform apply* command.
 
 ## Using STS
 
@@ -39,18 +41,22 @@ Please note! This will charge your account for the environment. The cost should 
 Additionally, if you cannot connect to the EC2 instance, please wait a few minutes. If the issue persists, reboot the EC2 instance and wait a few more minutes. Likely the needed SSM VPC Endpoints did not come up in time for the SSM agent to connect to them.
 
 ## Supported Services
-For the sake of not spinning up resources that would never be used, this project on creates VPC Endpoints for common services. You are welcome to add your own, or submit a pull request. The following are the supported services.
+For the sake of not spinning up resources that would never be used, this project only creates VPC Endpoints for common services. You are welcome to add your own, or submit a pull request. The following are the supported services (strikethrough = deprecated due to network activity events detection):
 
-* S3
-* EC2
+* ~~S3~~
+* ~~EC2~~
+* SSM
 * RDS
 * EBS
-* ECS
+* ~~ECS~~
 * RedShift
-* CloudTrail
+* ~~CloudTrail~~
 * STS
 * CodePipeline
-* KMS
-* Lambda
+* ~~KMS~~
+* ~~Lambda~~
 * SNS
 * SQS
+* ECR
+* EKS
+* Bedrock
